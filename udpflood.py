@@ -29,7 +29,4 @@ class UDPFlood(threading.Thread):
             time.sleep(0.01)
             self.sent_packets = self.sent_packets + 1
             s.close()
-        # print(threading.Thread.getName(self) +
-        #      " sent " + str(sent_packets) + " packets")
-        s.close()
         return self.sent_packets

@@ -31,8 +31,9 @@ def Main():
         start_time = datetime.now()
         q = queue.Queue()
         print(bcolors.OKBLUE + "Information:" + bcolors.ENDC)
-        print(bcolors.HEADER + "\tIP: " + ip + bcolors.ENDC)
-        print(bcolors.HEADER + "\tDURATION: " + str(duration) + bcolors.ENDC)
+        print(bcolors.HEADER + "\t[-] IP: " + ip + bcolors.ENDC)
+        print(bcolors.HEADER + "\t[-] DURATION: " +
+              str(duration) + bcolors.ENDC)
         for t in range(0, threads):
             newThread = UDPFlood(ip, duration)
             # newThread = SYNFlood(ip, duration)
@@ -49,21 +50,21 @@ def Main():
             total_sent_packets = total_sent_packets + amount
         end_time = datetime.now()
         runtime = end_time - start_time
-        print(bcolors.OKGREEN + "SENT PACKETS: " +
-              str(total_sent_packets) + "IN " + runtime)
+        print(bcolors.OKGREEN + "\t[-] SENT PACKETS: [" +
+              str(total_sent_packets) + "]IN " + str(runtime))
 
         # for t in thread:
         # t.join
     except KeyboardInterrupt:
         end_time = datetime.now()
         runtime = end_time - start_time
-        print(bcolors.FAIL + "INTERRUPTED" + bcolors.ENDC)
+        print(bcolors.FAIL + "\t[!] INTERRUPTED" + bcolors.ENDC)
         for t in thread:
             sent_packets.append(t.sent_packets)
         total_sent_packets = 0
         for amount in sent_packets:
             total_sent_packets = total_sent_packets + amount
-        print(bcolors.OKGREEN + "SENT PACKETS: " +
+        print(bcolors.OKGREEN + "\t[-] SENT PACKETS: " +
               str(total_sent_packets) + " IN " + str(runtime))
         sys.exit(1)
 
