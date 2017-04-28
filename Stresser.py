@@ -36,12 +36,9 @@ def Main():
               str(duration) + bcolors.ENDC)
         for t in range(0, threads):
             newThread = UDPFlood(ip, duration)
-            # newThread = SYNFlood(ip, duration)
             thread.append(newThread)
             newThread.daemon = True
             newThread.start()
-    #    for i in range(threads):
-    #        q.put(None)
         for t in thread:
             t.join()
             sent_packets.append(t.sent_packets)
@@ -53,8 +50,6 @@ def Main():
         print(bcolors.OKGREEN + "\t[-] SENT PACKETS: [" +
               str(total_sent_packets) + "]IN " + str(runtime))
 
-        # for t in thread:
-        # t.join
     except KeyboardInterrupt:
         end_time = datetime.now()
         runtime = end_time - start_time
